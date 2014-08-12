@@ -2,23 +2,25 @@
 title: "Clase140811"
 author: "Edgar J Gonzalez"
 date: "12 de agosto de 2014"
-output: html_document
+output: pdf_document
 ---
 <br />
 <br />
 Para instalar R en sus computadoras accedan a http://www.est.colpos.mx/R-mirror/
 
-Una vez instalado debemos ver algo semejantea esto (asi se ve en una mac, en windows algo similar debe verse [no se fijen en todos mis warnings en rojo]).
+Una vez instalado debemos ver algo semejante a esto (asi se ve en una mac, en windows algo similar debe verse [no se fijen en todos mis warnings en rojo]).
 
-![Rprogram](pantalla.png)
+![Rscreen](more/screen.png)
 
-Lo que ahorita importa entender es que el programa es 
+
+Lo que ahorita importa entender es que el programa es de linea de comando, i.e. tenemos que darle instrucciones despues del >
+
 
 
 
 R funciona con dos tipos de cosas: clases y funciones.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, out.width=2, out.height=2}
 
 ```
 
