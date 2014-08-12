@@ -1,19 +1,4 @@
----
-title: "Clase140812"
-author: "Edgar J Gonzalez"
-output: 
-  pdf_document: 
-    toc: false 
-    highlight: default
----
-
- ```{r, echo = TRUE, message = FALSE}
-knitr::opts_chunk$set(
-  comment = " ",
-  error = FALSE,
-  tidy = FALSE
-)
-```
+# Clase 140812
 
 Para instalar R en sus computadoras accedan a http://www.est.colpos.mx/R-mirror/
 
@@ -25,38 +10,85 @@ Lo que ahorita importa entender es que el programa es de linea de comando, i.e. 
 
 Introduzcamos un numero
 
-4
 ```{r, echo=FALSE}
 4
 ```
 
 Una suma, resta, producto, division, potenciacion de numeros
 
-4+3
 ```{r, echo=FALSE}
 4+3
 ```
-
-4*3
 ```{r, echo=FALSE}
 4*3
 ```
-
-4/3
 ```{r, echo=FALSE}
 4/3
 ```
-
-4^3
 ```{r, echo=FALSE}
 4^3
 ```
 
-Pero aqui nada mas estamos imprimiendo la informacion en pantalla...
+y aplicar funciones conocidas como
+
+```{r, echo=FALSE}
+log(4)
+```
+```{r, echo=FALSE}
+exp(4)
+```
+```{r, echo=FALSE}
+factorial(4)
+```
+```{r, echo=FALSE}
+choose(4,3)
+```
+```{r, echo=FALSE}
+abs(-4)
+```
+```{r, echo=FALSE}
+sqrt(4)
+```
+
+Pero aqui nada mas estamos imprimiendo la informacion en pantalla pues nada se esta almacenando.
+
+Para ello debemos ver como almacenar
+
+Un numero
+```{r, echo=FALSE}
+n = 4
+```
+
+Y podemos ver que tipo de dato (clase) es n
+```{r, echo=FALSE}
+class(n)
+```
+
+O preguntarle si n es un numero
+```{r, echo=FALSE}
+is.numeric(n)
+```
+
+Un vector
+```{r, echo=FALSE}
+t = c(2010,2011,2012,2013)
+class(t)
+is.vector(t)
+is.numeric(t)
+```
+
+Una palabra
+```{r, echo=FALSE}
+nombre = "Puma"
+is.character(nombre)
+```
+
+Un enunciado
+```{r, echo=FALSE}
+sp = "Puma concolor"
+is.character(sp)
+```
 
 
-<!R funciona con dos tipos de cosas: clases y funciones>
 
-<br />
-<br />
 _Texto escrito sin acentos por razones de compatibilidad. Pero eso no significa que no me importe su ortografia..._
