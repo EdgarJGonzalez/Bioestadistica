@@ -1,0 +1,20 @@
+# EDGAR: MISMO TEXTO QUE EL DE KARINA DIAZ. ÀQUIEN FUE EL QUE ORIGINALMENTE ESCRIBIO ESTO?
+# EDGAR: NO USES ACENTOS NI EGNES.
+# EDGAR: POR LO DEMAS TODO ESTA BIEN.
+
+table(x)
+#Hace que aparezca la tabla que se esta pidiendo(Frecuencias).
+
+which.max(table(x))
+#Localiza el valor maximo y tambien en que columna está
+
+names(which.max(table(x)))
+#Localiza el nombre de la columna del valor más grande.
+
+as.numeric(names(which.max(table(x))))
+#Si un nombre es un número esta función lo va a cambiar a un número para comprobarlo se usa otra función llamada:
+is.numeric(x)
+
+
+#x=datos$Frecuencia.respiratoria.ejercicio.fisico
+

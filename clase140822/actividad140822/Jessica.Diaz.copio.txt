@@ -1,0 +1,18 @@
+# EDGAR: ESTA ARCHIVO SE LLAMA SCRIPT COMENTARIOS SANTIAGO ANTONIO MURILLO PEREZ, NO KARINA DIAZ...
+
+table(x)
+#Hace que aparezca la tabla que se esta pidiendo(Frecuencias).
+
+
+
+which.max(table(x))
+#Localiza el valor maximo y tambien en que columna está
+
+names(which.max(table(x)))
+#Localiza el nombre de la columna del valor más grande.
+
+as.numeric(names(which.max(table(x))))
+#Si un nombre es un número esta función lo va a cambiar a un número para comprobarlo se usa otra función llamada:
+is.numeric(x)
+
+

@@ -1,0 +1,15 @@
+#Funcion 1
+table(datos$Edad)
+#Para sacAR la tabla de frecuencias de una variable querida (¿DE INTERES?), presentando los numeros ordenados crecientemente
+
+#Funcion 2
+which.max(table(datos$Edad))
+#Nos dice que lugar ocupa la categoria con la frecuencia mas alta en nuestra tabla de frecuenCias. La categoria 19 presenta la frecuencia mas alta.
+
+#Funcion 3
+names(which.max(table(datos$Edad)))
+#nos dice el nombre de la categoria que presenta la frecuencia mas grande.
+
+#Funcion 4
+as.numeric(names(which.max(table(x))))
+#Esta funcion nos dice cual es la moda de una variable.

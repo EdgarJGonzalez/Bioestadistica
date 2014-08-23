@@ -1,0 +1,16 @@
+# EDGAR: YO SE QUE ES CONTRAINTUITIVO, PERO EN LOS DOCUMENTOS QUE NO SON DE WORD NO USES ACENTOS NI EGNES PORQUE NO LOS SABE INTERPRETAR EL EDITOR DE TEXTOS.
+
+#funciOn1 ordena los datos de las variables de manera creciente indicando la frecuencia de cada una
+# EDGAR: AQUI SOLO ESTAMOS ANALIZANDO UNA VARIABLE: EDAD. LO QUE ESTAMOS OBTENIENDO ES LA FRECUENCIA CON QUE SE PRESENTA CADA CATEGORIA DE EDAD.
+table(datos$Edad)
+
+#funciOn2 indica quE lugar ocupa el dato correspondiente a la moda
+# EDGAR: funciOn2 indica quE lugar ocupa LA CATEGORIA DE EDAD correspondiente a la moda
+which.max(table(datos$Edad))
+
+#funciOn3 marca cuAl es el nombre de la categorIa que tiene la frecuencia mAs alta 
+names(which.max(table(datos$Edad)))
+
+#funciOn4 es una alternativa para poder calcular la moda de una variable
+# EDGAR: SI Y NO. LA FUNCION as.numeric() CONVIERTE EL NOMBRE DE LA CATEGORIA QEU TIENE LA FRECUENCIA MAS ALTA EN UN NUMERO. LA INSTRUCCION as.numeric(names(which.max(table(datos$Edad)))) SI ES UNA ALTERNATIVA AL CALCULO DE LA MODA DE UNA VARIABLE.
+as.numeric(names(which.max(table(datos$Edad))))

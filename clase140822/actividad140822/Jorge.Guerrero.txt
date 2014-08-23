@@ -1,0 +1,56 @@
+#numeros y cadenas
+#life is life
+n = 4
+n
+class(n) #que clase es mi variable n
+m = n + 5
+m
+nombre = "Mammillaria hernandezii" #la especie que estoy estudiando
+nombre
+class(nombre)
+sitio = "Llano de la estrella"
+sitio
+class(sitio)
+u = c(2000,2001,2002,2003)
+u
+class(u)
+x = n + 10
+x
+sitios = c("Llano de la estrella","Nacusenye","Agua blanca")
+A = matrix(nrow = 3,ncol = 2)
+A[,1] = c(3,1,6) 
+A[,2] = c(3.1,1.5,4.6)
+datos = as.data.frame(matrix(nrow = 3,ncol = 4))
+sp = rep(nombre,3)
+sp
+datos[,1] = sp
+datos[,2] = sitios
+datos[,3:4] = A
+datos
+colnames(datos) = c("Especie","Sitio","No.flores","Diametro")
+datos
+getwd()#dierectorio en el que esta la base de datos
+setwd("~/Desktop")
+#lectura de base de datos
+datos.alumnos = read.csv("datos_alumnos.csv",header = TRUE)
+datos.alumnos
+class(datos.alumnos)
+#Las siguientes funciones nos permiten ver los primeros 6 registros, los ultimos 6 registros, el resumen de la base de datos y la estructura de la base de datos.
+head(datos.alumnos)
+tail(datos.alumnos)
+summary(datos.alumnos)
+str(datos.alumnos)
+apellido2.stephanie=as.factor(apellido2.stephanie)
+datos.alumnos[6,4]=("Escobar")
+datos.alumnos[6,5]=("Sanchez")
+?mean #manual de la función mean
+str(datos) #estructura de base de datos
+datos$AlumnoID. #R identifica el tipo de variable: num o Factor. Como R no sabe si nuestros numeros son discretos (int) o continuos (num) por default les asigna el tipo de variable num.
+table(datos$Edad) #genera una tabla de frecuEncias
+which.max(table(datos$Edad)) # de la tabla de frecuencias toma el mas frecuente y la posiciOn en el que esta de la tabla
+# EDGAR: NO USES ACENTOS NI EGNES AUNQUE LASTIME A LOS OJOS.
+names(which.max(table(datos$Edad)))# obtiene el nombre del valor mAs frecuente de la tabla, en este caso de las edades
+# EDGAR: obtiene el nombre DE LA CATEGORIA mAs frecuente de la tabla, en este caso de las edades
+as.numeric(names(which.max(table(datos$Edad)))) identifica como número al nombre del valor mas frecuente 
+# EDGAR: ESCRIBISTE UN PARENTESIS DE MAS, OLVIDASTE EL # EN EL COMENTARIO
+#ÊEDGAR: CONVIERTE EN número EL nombre de LA CATEGORIA mas frecuente

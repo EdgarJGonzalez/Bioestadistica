@@ -1,0 +1,21 @@
+# EDGAR: TE FALTO # EN LA FECHA
+fecha 22/08/14
+> table(datos.alumnos$Edad) 
+#indicamos nuestra tabla de frecuencia
+#¿INDICAMOS? OBTENEMOS...
+
+18 19 20 21 22 23 
+ 5  8  2  1  1  1 
+> which.max(table(datos.alumnos$Edad)) 
+#sirve para saber cual fue la moda en los datos que ingresamos de todo el grupo.
+# EDGAR: NO, ESTA FUNCION SOLO NOS DICE LA UBICACION (2DA) DE LA CATEGORIA QUE TIENE MAS FRECUENCIA
+19 
+ 2 
+>  names(which.max(table(datos.alumnos$Edad)))
+#indicamos nombres de la tabla maxima ordenada
+# EDGAR: ESTO NO LO ENTIENDO...
+[1] "19"
+> as.numeric(names(which.max(table(datos.alumnos$Edad))))
+[1] 19
+#seleccionar en columnas de datos y que este ordenado
+# EDGAR: ESTO TAMPOCO LO ENTIENDO...

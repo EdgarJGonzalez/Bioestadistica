@@ -1,0 +1,24 @@
+# EDGAR: NO INCLUYAS EL > PORQUE SI LO PEGAS EN R NO VA A CORRER.
+
+>#Nombre: Cortes Gutierrez Daniela
+> table(datos.alumnos$Edad)
+
+18 19 20 21 22 23 
+ 5  8  2  1  1  1 
+> #Tabla de frecuencias absolutas
+> wich.max(table(datos.alumnos$Edad))
+Error: no se pudo encontrar la función "wich.max"
+> which.max(table(datos.alumnos$Edad))
+19 
+ 2 
+> ?which.max
+> #La funcion which.max nos indica que el segundo valor (19)en la tabla de frecuencias es el valor de mayor frecuencia
+> names(which.max(table(datos.alumnos$Edad)))
+[1] "19"
+> ?names
+> #La funcion names nos da el nombre de la variable que tuvo mayor frecuencia
+> as.numeric(names(which.max(table(datos.alumnos$Edad))))
+[1] 19
+> ?as.numeric
+> #La funcion as.numeric nos indica el valor numerico que tuvo mayor frecuencia
+# EDGAR: as.numeric() CONVIERTE EL FACTOR "19" EN EL NUMERO 19.

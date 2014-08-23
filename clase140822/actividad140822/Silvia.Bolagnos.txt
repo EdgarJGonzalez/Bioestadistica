@@ -1,0 +1,19 @@
+#ÊEDGAR: RECUERDA NO USAR ACENTOS NI EGNES
+
+> table(datos$Edad) #muestra todos los datos de Edad y su frecuencia(cuantas veces aparece)
+
+18 19 20 21 22 23 
+ 5  8  2  1  1  1 
+
+> which.max(table(datos$Edad)) #muestra el valor que se repite mAs veces
+# EDGAR: muestra LA CATEGORIA que se repite mAs veces
+19 
+ 2 
+
+> names(which.max(table(datos$Edad))) #toma sOlo el nombre del dato (como factor)
+# EDGAR: toma sOlo el nombre de LA CATEGORIA (como factor)
+[1] "19"
+
+> as.numeric(names(which.max(table(datos$Edad)))) #aparece ya el dato como numerico y ya no como factor
+#ÊEDGAR: aparece ya LA CATEGORIA como NUMERO y ya no como factor
+[1] 19

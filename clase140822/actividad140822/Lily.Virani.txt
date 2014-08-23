@@ -1,0 +1,170 @@
+#numeros y cadenas
+n = 4
+n
+class(n) #que clase es la variable n
+m = n + 5
+m
+nombre = "Mammillaria hernandezii"
+nombre
+class(nombre)
+sitio = "Llano de la estrella"
+sitio
+class(sitio)
+
+#vectores de numeros y vectores de cadenas 
+u = c(2000,2001,2002,2003)
+u
+class(u)
+x = n + 10
+x
+sitios = c("Llano de la estrella","Nacusenye","Agua blanca")
+
+
+#Matrices y bases de datos
+A = matrix(nrow = 3,ncol = 2)
+A[,1] = c(3,1,6) 
+A[,2] = c(3.1,1.5,4.6)
+datos = as.data.frame(matrix(nrow = 3,ncol = 4))
+sp = rep(nombre,3)
+sp
+datos[,1] = sp
+datos[,2] = sitios
+datos[,3:4] = A
+datos
+#cambiar nombre de columnas
+colnames(datos) = c("Especie","Sitio","No.flores","Diametro")
+datos
+
+#guardar el archivo datos_alumnos.xls .csv 
+
+#ver y cambiar directorio
+getwd()
+setwd( "C:/Users/EQUIPO01S3/Desktop"str(datos))
+
+#leer base de datos
+datos.alumnos = read.csv("datos_alumnos.csv",header = TRUE)
+datos.alumnos
+class(datos.alumnos)
+
+#revisar y modificar base de datos 
+# primeros 6 registros
+head(datos.alumnos)
+#ultimos 6 registros
+tail(datos.alumnos)
+# resumen de la base de datos
+summary(datos.alumnos)
+#estructura de la base de datos
+str(datos.alumnos)set
+
+
+#poner nombre
+apellido2.stephanie = "Sanchez"
+#cambiar a factor 
+apellido2.stephanie = as.factor(apellido2.stephanie)
+#poner segundo apellido
+datos.alumnos[6,5] = as.factor(apellido2.stephanie)
+
+
+#cambiar contenido de una celda
+datos[6,5]
+apellido.char = "Sanchez"
+class(apellido.char)
+apellido.factor = as.factor(apellido.char)
+class(apellido.factor)
+datos[6,5] = apellido.factor
+
+#almacenar directamente como factor
+datos[6,5] = as.factor("Sanchez")
+#almacenar como numero
+datos[8,1]=as.numeric("311113639")
+
+#ver datos de una columna 
+datos$Tipo.sangre
+
+#Cambio almacenando en variables
+datos.Edad.num = datos$Edad
+class(datos.Edad.num)
+datos.Edad.int = as.integer(datos.Edad.num)
+class(datos.Edad.int)
+datos$Edad = datos.Edad.int
+str(datos)
+
+#Cambio sin almacenar en variables
+datos$Edad = as.integer(datos$Edad)
+str(datos)
+
+#almacenar archivo desde R en WD
+write.csv(datos,"datos_alumnos_corregidos.csv")
+
+#funciones
+c()
+
+class()
+
+matrix()
+
+is.matrix()
+
+as.factor()
+
+as.integer()
+
+write.csv()
+
+
+#http://cran.r-project.org/web/packages/xlsx/xlsx.pdf
+install.packages("xlsx")
+
+#leer xlsx, todas tienen igual
+read.xlsx(file, sheetIndex, sheetName=NULL, rowIndex=NULL,
+startRow=NULL, endRow=NULL, colIndex=NULL,
+as.data.frame=TRUE, header=TRUE, colClasses=NA,
+keepFormulas=FALSE, encoding="unknown", ...)
+
+read.xlsx2(file, sheetIndex, sheetName=NULL, startRow=1,
+colIndex=NULL, endRow=NULL, as.data.frame=TRUE, header=TRUE,
+colClasses="character", ...)
+
+#funciones de estadisitca
+mean(datos$)
+median()
+mode()
+var()
+sd()
+#opciones de una funcion
+length(datos$Talla.zapatos)
+mean(datos$Talla.zapatos,trim = 1/18)
+mean(datos$Talla.zapatos,trim = 1/length(datos$Talla.zapatos))
+
+
+#para cuando hay NA
+mean(datos$Frecuencia.cardiaca.ejercicio.fisico,na.rm = TRUE)
+
+#moda
+names(sort(table(x),decreasing = TRUE))[1]
+#otra forma
+as.numeric(names(which.max(table(x))))
+
+#te da una tabla para la variable que pidas 
+# EDGAR: te da una tabla DE FRECUENCIAS para la variable que pidas
+table(datos$Edad)
+
+18 19 20 21 22 23 
+ 5  8  2  1  1  1 
+
+#te da el valor maximo de tu tabla y la posicion de la columna en que esta
+ which.max(table(datos$Edad))
+19 
+
+
+ 2 
+
+#te da el nombre para un objeto
+# EDGAR: TE DA EL NOMBRE DE LA CATEGORIA DONDE TIENES EL VALOR MAXIMO DE TU TABLA
+> names(which.max(table(datos$Edad)))
+[1] "19"
+
+#toma el nombre del objeto que introduces como un numero
+#EDGAR: CONVIERTE el nombre del objeto que introduces A un numero
+> as.numeric(names(which.max(table(datos$Edad))))
+[1] 19

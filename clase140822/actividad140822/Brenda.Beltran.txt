@@ -1,0 +1,21 @@
+mode(datos$Edad)
+?mode
+
+#Actividad
+
+table(datos$Edad)                                # funcion 1= creando una tabla con la frecuencia de las edades de mayor a menor
+# EDGAR: DE HECHO LAS CATEGORIAS SON DE EDADES MENORES A MAYORES: 18 A 23.
+18 19 20 21 22 23 
+ 5  8  2  1  1  1 
+
+which.max(table(datos$Edad))                     # funcion 2= Encontrando el valor con mayor o menor frecuencia en la tabla
+# EDGAR: COMO ESTAS USANDO LA FUNCION which.max() ESTAS ENCONTRANDO EL VALOR CON MAYOR FRECUENCIA. EL VALOR CON MENOR FRECUENCIA SE OBTIENE CON LA FUNCION which.min().
+19 
+ 2 
+
+names(which.max(table(datos$Edad)))              # funcion 3= arrojando el valor con mayor frecuencia en las edades
+# EDGAR: ESTA ARROJANDO EL NOMBRE DE LA CATEGORIA DE EDAD CON MAYOR FRECUENCIA.
+ "19"
+
+as.numeric(names(which.max(table(datos$Edad))))  # funcion 4= Convierte el valor arrojado en un valor numerico
+19

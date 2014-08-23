@@ -1,0 +1,7 @@
+# EDGAR: RECUERDA NO USAR ACENTOS NI EGNES.
+table(x) #nos da una tabla de frecuencias
+which.max(table(x)) #nos da el dato con mAs frecuencia
+#ÊEDGAR: NOS DA LA CATEGORIA DE EDAD CON MAS FRECUENCIA. LOS DATOS NO SON MAS FRECUENTES. LOS VALORES SON LOS QUE PUEDEN SER MAS O MENOS FRECUENTES.
+names(which.max(table(x))) #nos da el nombre de la variable con mAs frcuencia
+#ÊEDGAR: nos da el nombre de la CATEGORIA con mAs frcuencia
+as.numeric(names(which.max(table(x)))) #convierte el nombre en nUmero 

@@ -1,0 +1,14 @@
+#Te da la frecuencia que tiene cada dato
+#EDGAR: Te da la frecuencia que tiene cada CATEGORIA DE EDAD
+table(x)                               
+#te da la cantidad más repetida en el dato
+# EDGAR: UN DATO ES UNA MEDIDA DE LA VARIABLE OBSERVADA EN UN INDIVIDUO. LO QUE TE DA ES LA CATEGORIA DE EDAD MAS REPETIDA.
+# LO QUE VARIA ENTRE INDIVIDUOS ES EL VALOR DE LA VARIABLE.
+which.max(table(x))                     
+#te da el nombre de la máxima cantidad en el dato
+# EDGAR: TE DA LA POSICION DE LA CATEGORIA DE EDAD CON MAYOR FRECUENCIA.
+names(which.max(table(x)))           
+#trata el nombre del dato más repetido como numeric
+# EDGAR: NO USES ACENTOS NI EGNES.
+# CONVIERTE EL NOMBRE DE LA CATEGORIA DE EDAD CON MAYOR FRECUENCIA EN UN NUMERO: 19.
+as.numeric(names(which.max(table(x))))  
