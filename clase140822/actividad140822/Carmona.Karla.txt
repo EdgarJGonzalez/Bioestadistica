@@ -1,3 +1,5 @@
+# EDGAR: sin comentarios, todo bien.
+
 table(x) #Tabla con las edades y la frecuencia de cada una.     
 which.max(table(x))  #La edad con mayor frecuencia                     
 names(which.max(table(x))) #En este caso el 19 se toma como nombre de la columna, o sea como un factor.           
