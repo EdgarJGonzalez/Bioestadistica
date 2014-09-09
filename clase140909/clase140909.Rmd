@@ -1,0 +1,149 @@
+# Clase 140909
+
+## Preliminares
+
+Necesitamos instalar el paquete **{prob}**: ```install.packages("prob")```
+
+Y lo cargamos en R: ```require(prob)```
+
+
+## Probabilidad
+
+### Espacio muestral
+
+Ante un experimento tendremos diferentes resultados posibles. El **espacio muestral** (Omega) es el conjunto de todos los posibles resultados de este experimento. 
+
+Asi, por ejemplo, podemos tomar como experimento el color de una bola que sacamos de una urna que contiene 4 bolas con los colores amarillo, rojo, azul y verde. Entonces el espacio muestral de este experimento es:
+
+EM1 = {amarillo,rojo,azul,verde}.
+
+En R:
+
+1. Definimos una variable con las bolas en la urna ```bolas = c("amarillo","rojo","azul","verde")```.
+
+2. El espacio muestral del experimento de sacar una bola de la urna se obtiene con la funcion **urnsamples()**: ```urnsamples(bolas,size = 1)```.
+
+Otro experimento mas biologico es la base que tiene un nucleotido en un segmento de ADN. Observa que este experimento es equivalente al de sacar una bola de una urna con 4 bolas diferentes. Su espacio muestral sera:
+
+EM2 = {A, T, G, C}.
+
+En R:
+
+1. Definimos las bases posibles ```bases = c("A","T","G","C")```.
+
+2. El espacio muestral de este experimento equivale a sacar una letra de una urna con 4 letras: ```urnsamples(bases,size = 1)```.
+
+Otro experimento mas complicado son las bases que puede tener un triplete de nucleotidos en un segmento de ADN. Su espacio muestral sera:
+
+EM3 = {AAA, AAT, AAG, AAC, ATA, ATT, ...}.
+
+El experimento anterior es equivalente a sacar tres bolas _con reemplazo_ de una urna que contiene 4 bolas diferentes, i.e. en R:
+
+``urnsamples(bases,size = 3,replace = TRUE)```.
+
+Pero estos no son todos los casos posibles, pues no es lo mismo el evento {AGC} que el evento {ACG}. El orden si importa. Entonces usamos la opcion _order = TRUE_: 
+
+``urnsamples(bases,size = 3,replace = TRUE,order = TRUE)```.
+
+Un experimento _sin reemplazo_ y _sin orden_ ocurriria cuando un resultado no se puede repetir y el orden como se obtengan los resultados no importa. Por ejemplo, cuanto tenemos un conjunto de organismos y vamos a escoger al azar un subconjunto de estos que sera al que le aplicaremos un tratamiento, mientras que el complemento de este subconjunto sera el grupo control.
+
+_ACTIVIDAD: ¿Se les ocurre un experimento sin remplazo y con orden?_
+
+### Eventos
+
+Un **evento** es un subconjunto del espacio muestral. Asi por ejemplo, retomando el experimento del triplete de nucleotidos, tenemos los eventos:
+
+A: tener el triplete AAA, i.e., el subconjunto que tiene un elemento: {AAA}
+
+En R: 
+
+Primero, almacenamos el espacio muestral de los posibles tripletes: ```tripletes = urnsamples(bases,size = 3,replace = TRUE,order = TRUE)```.
+
+Luego, usamos la funcion **subset()** para obtener el subconjunto de eventos tal que X1 = A, X2 = A, X3 = A: ```subset(tripletes,X1 == "A" & X2 == "A" & X3 == "A")```. 
+
+**==** verifica si algo (X1) es igual a otra cosa ("A") y devuelve un valor logico. Chequen que pasa cuando hacen: ```tripletes$X1 == "A"```.
+
+**&** verifica que se cumplan dos condiciones. Chequen que pasa cuando hacen: tripletes$X1 == "A" & tripletes$X2 == "A" & tripletes$X3 == "A".
+
+Como el unico elemento del espacio muestral que cumple que X1 = A, X2 = A, X3 = A es el primer triplete, ```subset(tripletes,X1 == "A" & X2 == "A" & X3 == "A")``` solo arroja un elemento (una fila).
+
+Veamos otro evento:
+
+B: tener un triplete que terminen con una Adenanina o una Timina, i.e., el subconjunto que tiene los primeros 32 elementos elementos de tripletes.
+
+En R: ```subset(tripletes,X3 == "A" | X3 == "T")```
+
+**|** verifica que una u otra condicion Chequen que pasa cuando hacen: ```tripletes$X3 == "A" | tripletes$X3 == "T"```.
+
+Como los primeros 32 elementos del espacio muestral cumplen que X3 = A o X3 = T, ```subset(tripletes,X3 == "A" | X3 == "T")``` arroja los primeros 32 elementos del espacio muestral.
+
+_ACTIVIDAD: obtengan el evento C: tener al menos una base que sea Adenina._
+
+### Union, interseccion y complemento de eventos
+
+Como los eventos son conjuntos se pueden hacer operaciones entre conjuntos, como union, interseccion y complemento:
+
+**Union** (AuB) es la union de los elementos de dos o mas eventos.
+
+Si D: tener el triplete TTT, D = {TTT}
+Si E: tener el triplete GGG, E = {GGG}
+Si F: tener el triplete CCC, F = {CCC}
+
+A U D U E U F = {AAA,TTT,GGG,CCC}, i.e. A U D U E U F: tener un triplete de la misma base.
+
+**Interseccion** (A$\cap$B) es el subconjunto de los elementos que dos o mas eventos comparten.
+
+Asi, por ejemplo, A n D = 0 pues A y D no comparten elementos.
+
+y A n B = B pues TTT esta contenido en el evento tener un triplete que termine en A o T.
+
+**Complemento** (A<sup>c</sup>) es el conjunto que contiene todos los elementos del espacio muestral que no estan en el conjunto
+
+B<sup>c</sup>: todos los tipletes que terminen en G o C.
+
+_ACTIVIDAD: ¿Cual es la union y la interseccion de los conjuntos A y C? ¿Cual es el complemento de C?_
+
+
+### Cardinalidad
+
+La **cardinalidad** de un conjunto (finito) es el numero de elementos que este tiene. La cardinalidad de un conjunto A se expresa como |A|.
+
+Si almacenamos el evento B como ```B = subset(tripletes,X3 == "A" | X3 == "T")```, podemos ver que B es una base de datos con ```class(B)```. 
+
+El numero de filas es la cardinalidad del evento. Usamos la funcion **nrow()** para saber cuantas filas tiene la base de datos:
+
+```nrow(B)```. Entonces la cardinalidad del evento B es ```nrow(B)```.
+
+_ACTIVIDAD: ¿Cual es la cardinalidad del espacio muestral tripletes?_
+
+### Probabilidad de un evento
+
+La **probabilidad de un evento** A, P(A), es el cociente entre la cardinalidad del evento A y la cardinalidad del espacio muestral, o sea:
+
+P(A) = |A|/|EM|
+
+Asi, para el evento B: tener un triplete que terminen con una Adenanina o una Timina, la probabilidad de que esto ocurra es:
+
+P(B) = |B|/|EM| = 37/64 = 0.5781
+
+En R:
+
+```ProbB = nrow(B)/nrow(tripletes)```
+
+```ProbB```
+
+
+### Observaciones
+
+**LA PROXIMA CLASE REALIZAREMOS LA PRACTICA1. ESTA PRACTICA CUENTA EN SU CALIFICACION ASI QUE REPASEN.**
+
+**SI NO TERMINARON ESTAS ACTIVIDADES, HAGANLAS EN SU CASA Y ENVIENMELAS A MI CORREO.**
+
+_No olviden eliminar el archivo_ *datos_alumnos.xls*, *datos_alumnos.csv*, *riqueza_vertebrados.xls* y *riqueza_vertebrados.csv* _del Escritorio._
+
+_No olviden llevarse consigo su script en un USB u otro medio._
+
+_Los retos no se resuelven con lo que vemos en clase, necesitan echarle ganas y buscar en internet o en paqueteria de R la manera como lograr hacer lo que les pido._
+
+_Texto escrito sin acentos por razones de compatibilidad. Pero eso no significa que no me importe su ortografia..._
+
