@@ -1,0 +1,109 @@
+<h1 id="clase-140909">Clase 140909</h1>
+<h2 id="preliminares">Preliminares</h2>
+<p>Necesitamos instalar el paquete <strong>{prob}</strong>: <code>install.packages(&quot;prob&quot;)</code></p>
+<p>Y lo cargamos en R: <code>require(prob)</code></p>
+<h2 id="probabilidad">Probabilidad</h2>
+<h3 id="espacio-muestral">Espacio muestral</h3>
+<p>Ante un experimento tendremos diferentes resultados posibles. El <strong>espacio muestral</strong> (Omega) es el conjunto de todos los posibles resultados de este experimento.</p>
+<p>Asi, por ejemplo, podemos tomar como experimento el color de una bola que sacamos de una urna que contiene 4 bolas con los colores amarillo, rojo, azul y verde. Entonces el espacio muestral de este experimento es:</p>
+<p>EM1 = {amarillo,rojo,azul,verde}.</p>
+<p>En R:</p>
+<ol style="list-style-type: decimal">
+<li><p>Definimos una variable con las bolas en la urna <code>bolas = c(&quot;amarillo&quot;,&quot;rojo&quot;,&quot;azul&quot;,&quot;verde&quot;)</code>.</p></li>
+<li><p>El espacio muestral del experimento de sacar una bola de la urna se obtiene con la funcion <strong>urnsamples()</strong>: <code>urnsamples(bolas,size = 1)</code>.</p></li>
+</ol>
+<p>Otro experimento mas biologico es la base que tiene un nucleotido en un segmento de ADN. Observa que este experimento es equivalente al de sacar una bola de una urna con 4 bolas diferentes. Su espacio muestral sera:</p>
+<p>EM2 = {A, T, G, C}.</p>
+<p>En R:</p>
+<ol style="list-style-type: decimal">
+<li><p>Definimos las bases posibles <code>bases = c(&quot;A&quot;,&quot;T&quot;,&quot;G&quot;,&quot;C&quot;)</code>.</p></li>
+<li><p>El espacio muestral de este experimento equivale a sacar una letra de una urna con 4 letras: <code>urnsamples(bases,size = 1)</code>.</p></li>
+</ol>
+<p>Otro experimento mas complicado son las bases que puede tener un triplete de nucleotidos en un segmento de ADN. Su espacio muestral sera:</p>
+<p>EM3 = {AAA, AAT, AAG, AAC, ATA, ATT, ...}.</p>
+<p>El experimento anterior es equivalente a sacar tres bolas <em>con reemplazo</em> de una urna que contiene 4 bolas diferentes, i.e. en R:</p>
+<p>``urnsamples(bases,size = 3,replace = TRUE)```.</p>
+<p>Pero estos no son todos los casos posibles, pues no es lo mismo el evento {AGC} que el evento {ACG}. El orden si importa. Entonces usamos la opcion <em>order = TRUE</em>:</p>
+<p>``urnsamples(bases,size = 3,replace = TRUE,order = TRUE)```.</p>
+<p>Un experimento <em>sin reemplazo</em> y <em>sin orden</em> ocurriria cuando un resultado no se puede repetir y el orden como se obtengan los resultados no importa. Por ejemplo, cuanto tenemos un conjunto de organismos y vamos a escoger al azar un subconjunto de estos que sera al que le aplicaremos un tratamiento, mientras que el complemento de este subconjunto sera el grupo control.</p>
+<p><em>ACTIVIDAD: ¿Se les ocurre un experimento sin remplazo y con orden?</em></p>
+<h3 id="eventos">Eventos</h3>
+<p>Un <strong>evento</strong> es un subconjunto del espacio muestral. Asi por ejemplo, retomando el experimento del triplete de nucleotidos, tenemos los eventos:</p>
+<p>A: tener el triplete AAA, i.e., el subconjunto que tiene un elemento: {AAA}</p>
+<p>En R:</p>
+<p>Primero, almacenamos el espacio muestral de los posibles tripletes: <code>tripletes = urnsamples(bases,size = 3,replace = TRUE,order = TRUE)</code>.</p>
+<p>Luego, usamos la funcion <strong>subset()</strong> para obtener el subconjunto de eventos tal que X1 = A, X2 = A, X3 = A: <code>subset(tripletes,X1 == &quot;A&quot; &amp; X2 == &quot;A&quot; &amp; X3 == &quot;A&quot;)</code>.</p>
+<p><strong>==</strong> verifica si algo (X1) es igual a otra cosa (&quot;A&quot;) y devuelve un valor logico. Chequen que pasa cuando hacen: <code>tripletes$X1 == &quot;A&quot;</code>.</p>
+<p><strong>&amp;</strong> verifica que se cumplan dos condiciones. Chequen que pasa cuando hacen: tripletes<span class="math">$X1 == &quot;A&quot; &amp; tripletes$</span>X2 == &quot;A&quot; &amp; tripletes$X3 == &quot;A&quot;.</p>
+<p>Como el unico elemento del espacio muestral que cumple que X1 = A, X2 = A, X3 = A es el primer triplete, <code>subset(tripletes,X1 == &quot;A&quot; &amp; X2 == &quot;A&quot; &amp; X3 == &quot;A&quot;)</code> solo arroja un elemento (una fila).</p>
+<p>Veamos otro evento:</p>
+<p>B: tener un triplete que terminen con una Adenanina o una Timina, i.e., el subconjunto que tiene los primeros 32 elementos elementos de tripletes.</p>
+<p>En R: <code>subset(tripletes,X3 == &quot;A&quot; | X3 == &quot;T&quot;)</code></p>
+<p><strong>|</strong> verifica que una u otra condicion Chequen que pasa cuando hacen: <code>tripletes$X3 == &quot;A&quot; | tripletes$X3 == &quot;T&quot;</code>.</p>
+<p>Como los primeros 32 elementos del espacio muestral cumplen que X3 = A o X3 = T, <code>subset(tripletes,X3 == &quot;A&quot; | X3 == &quot;T&quot;)</code> arroja los primeros 32 elementos del espacio muestral.</p>
+<p><em>ACTIVIDAD: obtengan el evento C: tener al menos una base que sea Adenina.</em></p>
+<h3 id="union-interseccion-diferencia-y-complemento-de-eventos">Union, interseccion, diferencia y complemento de eventos</h3>
+<p>Como los eventos son conjuntos se pueden hacer operaciones entre conjuntos, como union, interseccion y complemento:</p>
+<p><strong>Union</strong> (A &cap; B) es la union de los elementos de dos o mas eventos.</p>
+<p>Si D: tener el triplete TTT, D = {TTT} Si E: tener el triplete GGG, E = {GGG} Si F: tener el triplete CCC, F = {CCC}</p>
+<p>A u D u E u F = {AAA,TTT,GGG,CCC}, i.e. A u D u E u F: tener un triplete de la misma base.</p>
+<p>En R usamos la funcion <strong>union()</strong>. Definimos los eventos D, E y F:</p>
+<p><code>D = subset(tripletes,X1 == &quot;T&quot; &amp; X2 == &quot;T&quot; &amp; X3 == &quot;T&quot;)</code>,</p>
+<p><code>E = subset(tripletes,X1 == &quot;G&quot; &amp; X2 == &quot;G&quot; &amp; X3 == &quot;G&quot;)</code>,</p>
+<p><code>F = subset(tripletes,X1 == &quot;C&quot; &amp; X2 == &quot;C&quot; &amp; X3 == &quot;C&quot;)</code></p>
+<p>Y vamos uniendo a pares pues la funcion <strong>union()</strong> solo une dos conjuntos.</p>
+<p><code>AuD = union(A,D)</code>, <code>AuDuE = union(AuD,E)</code>, <code>AuDuEuF = union(AuDuE,F)</code></p>
+<p>o concatenando funciones:</p>
+<p><code>AuDuEuF = union(union(union(A,D),E),F)</code>.</p>
+<p><strong>Interseccion</strong> (A n B) es el subconjunto de los elementos que dos o mas eventos comparten.</p>
+<p>Asi, por ejemplo, A n D = 0 pues A y D no comparten elementos.</p>
+<p>y A n B = B pues TTT esta contenido en el evento tener un triplete que termine en A o T.</p>
+<p><strong>Diferencia</strong> (Ao A-B) es el subconjunto de A que no tiene los elementos de B.</p>
+<p>Con nuestros conjuntos A= 0 y Bes todo B menos el triplete AAA.</p>
+<p>En R usamos la funcion <strong>setdiff()</strong>: <code>setdiff(A,B)</code>, <code>setdiff(B,A)</code>.</p>
+<p><strong>Complemento</strong> (A<sup>c</sup>) es el conjunto que contiene todos los elementos del espacio muestral que no estan en el conjunto. Fijense que A<sup>c</sup> = EM</p>
+<p>Asi, por ejemplo:</p>
+<p>B<sup>c</sup>: todos los tipletes que terminen en G o C.</p>
+<p>En R usamos la funcion <strong>setdiff()</strong>: <code>setdiff(EM,B)</code>.</p>
+<p><em>ACTIVIDAD: ¿Cual es la union y la interseccion de los conjuntos A y C? ¿Cual es el complemento de C?</em></p>
+<h3 id="cardinalidad">Cardinalidad</h3>
+<p>La <strong>cardinalidad</strong> de un conjunto (finito) es el numero de elementos que este tiene. La cardinalidad de un conjunto A se expresa como |A|.</p>
+<p>Si almacenamos el evento B como <code>B = subset(tripletes,X3 == &quot;A&quot; | X3 == &quot;T&quot;)</code>, podemos ver que B es una base de datos con <code>class(B)</code>.</p>
+<p>El numero de filas es la cardinalidad del evento. Usamos la funcion <strong>nrow()</strong> para saber cuantas filas tiene la base de datos: <code>nrow(B)</code>.</p>
+<p>Entonces la cardinalidad del evento B es <code>nrow(B)</code>.</p>
+<p><em>ACTIVIDAD: ¿Cual es la cardinalidad del espacio muestral tripletes?</em></p>
+<h3 id="probabilidad-de-un-evento">Probabilidad de un evento</h3>
+<p>La <strong>probabilidad de un evento</strong> A, P(A), es el cociente entre la cardinalidad del evento A y la cardinalidad del espacio muestral, o sea:</p>
+<p>P(A) = |A|/|EM|</p>
+<p>Asi, para el evento B: tener un triplete que terminen con una Adenanina o una Timina, la probabilidad de que esto ocurra es:</p>
+<p>P(B) = |B|/|EM| = 37/64 = 0.5781</p>
+<p>En R: <code>nrow(B)/nrow(tripletes)</code>.</p>
+<p>Fijense que:</p>
+<ol style="list-style-type: decimal">
+<li>El numero maximo de elementos que puede tener un evento A es |EM|, entonces P(A) &lt;= P(EM) = |EM|/|EM| = 1.</li>
+<li>El numero minimo de elementos que puede tener un evento A es 0 y |0| = 0, entonces P(A) &gt;= P(0) = |0|/|EM| = 0/|EM| = 0.</li>
+<li>De lo anterior, la probabilidad de un evento A es 0 &lt;= P(A) &lt;= 1.</li>
+</ol>
+<h3 id="probabilidad-de-la-unioninterseccion-de-dos-eventos">Probabilidad de la union/interseccion de dos eventos</h3>
+<p>P(A u B) = P(A) + P(B) - P(A n B)</p>
+<p><em>ACTIVIDAD: chequen que esto pasa en nuestros eventos A y B.</em></p>
+<p>De esta relacion se deduce que, si B = A<sup>c</sup>.</p>
+<p>P(A u A<sup>c</sup>) = P(A) + P(A<sup>c</sup>) - P(A n A<sup>c</sup>). (<strong>Formula 1</strong>)</p>
+<p>Pero fijense que:</p>
+<ol style="list-style-type: decimal">
+<li>A u A<sup>c</sup> = EM y P(EM) = 1, entonces P(A u A<sup>c</sup>) = 1</li>
+<li>A n A<sup>c</sup> = 0 y P(0) = 0, entonces P(A n A<sup>c</sup>) = 0</li>
+</ol>
+<p>Por lo que tenemos que la formula de arriba se convierte en:</p>
+<p>1 = P(A) + P(A<sup>c</sup>) - 0</p>
+<p>O sea,</p>
+<p>1 = P(A) + P(A<sup>c</sup>)</p>
+<p>O sea,</p>
+<p>1 - P(A) = P(A<sup>c</sup>)</p>
+<p>Es decir,</p>
+<p>P(A<sup>c</sup>) = 1 - P(A). (<strong>Formula 2</strong>)</p>
+<p><em>ACTIVIDAD: muestren que la Formula 1 y la Formula 2 se cumplen entre nuestros conjuntos B y B<sup>c</sup>.</em></p>
+<h3 id="observaciones">Observaciones</h3>
+<p><strong>SI NO TERMINARON ESTAS ACTIVIDADES, HAGANLAS EN SU CASA Y ENVIENMELAS A MI CORREO.</strong></p>
+<p><em>No olviden llevarse consigo su script en un USB u otro medio.</em></p>
+<p><em>Texto escrito sin acentos por razones de compatibilidad. Pero eso no significa que no me importe su ortografia...</em></p>
