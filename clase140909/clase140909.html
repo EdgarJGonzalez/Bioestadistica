@@ -6,7 +6,7 @@
 <h3 id="espacio-muestral">Espacio muestral</h3>
 <p>Ante un experimento tendremos diferentes resultados posibles. El <strong>espacio muestral</strong> (Omega) es el conjunto de todos los posibles resultados de este experimento.</p>
 <p>Asi, por ejemplo, podemos tomar como experimento el color de una bola que sacamos de una urna que contiene 4 bolas con los colores amarillo, rojo, azul y verde. Entonces el espacio muestral de este experimento es:</p>
-<p>EM1 = {amarillo,rojo,azul,verde}.</p>
+<p>EM1 = {amarillo, rojo, azul, verde}.</p>
 <p>En R:</p>
 <ol style="list-style-type: decimal">
 <li><p>Definimos una variable con las bolas en la urna <code>bolas = c(&quot;amarillo&quot;,&quot;rojo&quot;,&quot;azul&quot;,&quot;verde&quot;)</code>.</p></li>
@@ -22,11 +22,11 @@
 <p>Otro experimento mas complicado son las bases que puede tener un triplete de nucleotidos en un segmento de ADN. Su espacio muestral sera:</p>
 <p>EM3 = {AAA, AAT, AAG, AAC, ATA, ATT, ...}.</p>
 <p>El experimento anterior es equivalente a sacar tres bolas <em>con reemplazo</em> de una urna que contiene 4 bolas diferentes, i.e. en R:</p>
-<p>``urnsamples(bases,size = 3,replace = TRUE)```.</p>
+<p><code>urnsamples(bases,size = 3,replace = TRUE)</code>.</p>
 <p>Pero estos no son todos los casos posibles, pues no es lo mismo el evento {AGC} que el evento {ACG}. El orden si importa. Entonces usamos la opcion <em>order = TRUE</em>:</p>
-<p>``urnsamples(bases,size = 3,replace = TRUE,order = TRUE)```.</p>
+<p><code>urnsamples(bases,size = 3,replace = TRUE,order = TRUE)</code>.</p>
 <p>Un experimento <em>sin reemplazo</em> y <em>sin orden</em> ocurriria cuando un resultado no se puede repetir y el orden como se obtengan los resultados no importa. Por ejemplo, cuanto tenemos un conjunto de organismos y vamos a escoger al azar un subconjunto de estos que sera al que le aplicaremos un tratamiento, mientras que el complemento de este subconjunto sera el grupo control.</p>
-<p><em>ACTIVIDAD: ¿Se les ocurre un experimento sin remplazo y con orden?</em></p>
+<p><em>ACTIVIDAD: Se les ocurre un experimento sin remplazo y con orden?</em></p>
 <h3 id="eventos">Eventos</h3>
 <p>Un <strong>evento</strong> es un subconjunto del espacio muestral. Asi por ejemplo, retomando el experimento del triplete de nucleotidos, tenemos los eventos:</p>
 <p>A: tener el triplete AAA, i.e., el subconjunto que tiene un elemento: {AAA}</p>
@@ -44,9 +44,9 @@
 <p><em>ACTIVIDAD: obtengan el evento C: tener al menos una base que sea Adenina.</em></p>
 <h3 id="union-interseccion-diferencia-y-complemento-de-eventos">Union, interseccion, diferencia y complemento de eventos</h3>
 <p>Como los eventos son conjuntos se pueden hacer operaciones entre conjuntos, como union, interseccion y complemento:</p>
-<p><strong>Union</strong> (A &cap; B) es la union de los elementos de dos o mas eventos.</p>
+<p><strong>Union</strong> (A &cup; B) es la union de los elementos de dos o mas eventos.</p>
 <p>Si D: tener el triplete TTT, D = {TTT} Si E: tener el triplete GGG, E = {GGG} Si F: tener el triplete CCC, F = {CCC}</p>
-<p>A u D u E u F = {AAA,TTT,GGG,CCC}, i.e. A u D u E u F: tener un triplete de la misma base.</p>
+<p>A &cup; D &cup; E &cup; F = {AAA,TTT,GGG,CCC}, i.e. A &cup; D &cup; E &cup; F: tener un triplete de la misma base.</p>
 <p>En R usamos la funcion <strong>union()</strong>. Definimos los eventos D, E y F:</p>
 <p><code>D = subset(tripletes,X1 == &quot;T&quot; &amp; X2 == &quot;T&quot; &amp; X3 == &quot;T&quot;)</code>,</p>
 <p><code>E = subset(tripletes,X1 == &quot;G&quot; &amp; X2 == &quot;G&quot; &amp; X3 == &quot;G&quot;)</code>,</p>
@@ -55,23 +55,23 @@
 <p><code>AuD = union(A,D)</code>, <code>AuDuE = union(AuD,E)</code>, <code>AuDuEuF = union(AuDuE,F)</code></p>
 <p>o concatenando funciones:</p>
 <p><code>AuDuEuF = union(union(union(A,D),E),F)</code>.</p>
-<p><strong>Interseccion</strong> (A n B) es el subconjunto de los elementos que dos o mas eventos comparten.</p>
-<p>Asi, por ejemplo, A n D = 0 pues A y D no comparten elementos.</p>
-<p>y A n B = B pues TTT esta contenido en el evento tener un triplete que termine en A o T.</p>
-<p><strong>Diferencia</strong> (Ao A-B) es el subconjunto de A que no tiene los elementos de B.</p>
-<p>Con nuestros conjuntos A= 0 y Bes todo B menos el triplete AAA.</p>
+<p><strong>Interseccion</strong> (A &cap; B) es el subconjunto de los elementos que dos o mas eventos comparten.</p>
+<p>Asi, por ejemplo, A &cap; D = &empty; pues A y D no comparten elementos.</p>
+<p>y A &cap; B = B pues TTT esta contenido en el evento tener un triplete que termine en A o T.</p>
+<p><strong>Diferencia</strong> (A\B o A-B) es el subconjunto de A que no tiene los elementos de B.</p>
+<p>Con nuestros conjuntos A\B = &empty; y B\A es todo B menos el triplete AAA.</p>
 <p>En R usamos la funcion <strong>setdiff()</strong>: <code>setdiff(A,B)</code>, <code>setdiff(B,A)</code>.</p>
-<p><strong>Complemento</strong> (A<sup>c</sup>) es el conjunto que contiene todos los elementos del espacio muestral que no estan en el conjunto. Fijense que A<sup>c</sup> = EM</p>
+<p><strong>Complemento</strong> (A<sup>c</sup>) es el conjunto que contiene todos los elementos del espacio muestral que no estan en el conjunto. Fijense que A<sup>c</sup> = EM\A</p>
 <p>Asi, por ejemplo:</p>
 <p>B<sup>c</sup>: todos los tipletes que terminen en G o C.</p>
 <p>En R usamos la funcion <strong>setdiff()</strong>: <code>setdiff(EM,B)</code>.</p>
-<p><em>ACTIVIDAD: ¿Cual es la union y la interseccion de los conjuntos A y C? ¿Cual es el complemento de C?</em></p>
+<p><em>ACTIVIDAD: Cual es la union y la interseccion de los conjuntos A y C? Cual es el complemento de C?</em></p>
 <h3 id="cardinalidad">Cardinalidad</h3>
 <p>La <strong>cardinalidad</strong> de un conjunto (finito) es el numero de elementos que este tiene. La cardinalidad de un conjunto A se expresa como |A|.</p>
 <p>Si almacenamos el evento B como <code>B = subset(tripletes,X3 == &quot;A&quot; | X3 == &quot;T&quot;)</code>, podemos ver que B es una base de datos con <code>class(B)</code>.</p>
 <p>El numero de filas es la cardinalidad del evento. Usamos la funcion <strong>nrow()</strong> para saber cuantas filas tiene la base de datos: <code>nrow(B)</code>.</p>
 <p>Entonces la cardinalidad del evento B es <code>nrow(B)</code>.</p>
-<p><em>ACTIVIDAD: ¿Cual es la cardinalidad del espacio muestral tripletes?</em></p>
+<p><em>ACTIVIDAD: Cual es la cardinalidad del espacio muestral tripletes?</em></p>
 <h3 id="probabilidad-de-un-evento">Probabilidad de un evento</h3>
 <p>La <strong>probabilidad de un evento</strong> A, P(A), es el cociente entre la cardinalidad del evento A y la cardinalidad del espacio muestral, o sea:</p>
 <p>P(A) = |A|/|EM|</p>
@@ -80,19 +80,19 @@
 <p>En R: <code>nrow(B)/nrow(tripletes)</code>.</p>
 <p>Fijense que:</p>
 <ol style="list-style-type: decimal">
-<li>El numero maximo de elementos que puede tener un evento A es |EM|, entonces P(A) &lt;= P(EM) = |EM|/|EM| = 1.</li>
-<li>El numero minimo de elementos que puede tener un evento A es 0 y |0| = 0, entonces P(A) &gt;= P(0) = |0|/|EM| = 0/|EM| = 0.</li>
-<li>De lo anterior, la probabilidad de un evento A es 0 &lt;= P(A) &lt;= 1.</li>
+<li>El numero maximo de elementos que puede tener un evento A es |EM|, entonces P(A) &le; P(EM) = |EM|/|EM| = 1.</li>
+<li>El numero minimo de elementos que puede tener un evento A es 0 y |&empty;| = 0, entonces P(A) &ge; P(&empty;) = |&empty;|/|EM| = 0/|EM| = 0.</li>
+<li>De lo anterior, la probabilidad de un evento A es 0 &le; P(A) &le; 1.</li>
 </ol>
 <h3 id="probabilidad-de-la-unioninterseccion-de-dos-eventos">Probabilidad de la union/interseccion de dos eventos</h3>
-<p>P(A u B) = P(A) + P(B) - P(A n B)</p>
+<p>P(A &cup; B) = P(A) + P(B) - P(A &cap; B)</p>
 <p><em>ACTIVIDAD: chequen que esto pasa en nuestros eventos A y B.</em></p>
 <p>De esta relacion se deduce que, si B = A<sup>c</sup>.</p>
-<p>P(A u A<sup>c</sup>) = P(A) + P(A<sup>c</sup>) - P(A n A<sup>c</sup>). (<strong>Formula 1</strong>)</p>
+<p>P(A &cup; A<sup>c</sup>) = P(A) + P(A<sup>c</sup>) - P(A &cap; A<sup>c</sup>). (<strong>Formula 1</strong>)</p>
 <p>Pero fijense que:</p>
 <ol style="list-style-type: decimal">
-<li>A u A<sup>c</sup> = EM y P(EM) = 1, entonces P(A u A<sup>c</sup>) = 1</li>
-<li>A n A<sup>c</sup> = 0 y P(0) = 0, entonces P(A n A<sup>c</sup>) = 0</li>
+<li>A &cup; A<sup>c</sup> = EM y P(EM) = 1, entonces P(A &cup; A<sup>c</sup>) = 1</li>
+<li>A &cap; A<sup>c</sup> = 0 y P(&empty;) = 0, entonces P(A &cap; A<sup>c</sup>) = 0</li>
 </ol>
 <p>Por lo que tenemos que la formula de arriba se convierte en:</p>
 <p>1 = P(A) + P(A<sup>c</sup>) - 0</p>
