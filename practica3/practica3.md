@@ -30,7 +30,7 @@ Podemos decir que vienen de la misma población si las medias y las varianzas po
 
 Una población se tiene clasificada de acuerdo a dos criterios: color de cabello (negro, castaño, güero) y color de ojos (obscuros, verdes, azules, miel). Se tiene las siguientes cantidades de individuos en cada categoría:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Negro&nbsp;&nbsp;&nbsp;&nbsp;Castaño&nbsp;&nbsp;&nbsp;&nbsp;Miel<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Negro&nbsp;&nbsp;&nbsp;&nbsp;Castaño&nbsp;&nbsp;&nbsp;&nbsp;Miel<br />
 obscuros&nbsp;&nbsp;&nbsp;&nbsp;	560&nbsp;&nbsp;&nbsp;&nbsp;		400	&nbsp;&nbsp;&nbsp;&nbsp;	2<br />
 verdes	&nbsp;&nbsp;&nbsp;&nbsp;5	&nbsp;&nbsp;&nbsp;&nbsp;	8	&nbsp;&nbsp;&nbsp;&nbsp;4<br />
 azules	&nbsp;&nbsp;&nbsp;&nbsp;	3	&nbsp;&nbsp;&nbsp;&nbsp;	11	&nbsp;&nbsp;&nbsp;&nbsp;	5<br />
